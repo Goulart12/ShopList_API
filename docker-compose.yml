@@ -1,0 +1,41 @@
+services:
+  grocerystoreshoplistapi:
+    image: grocerystoreshoplistapi
+    build:
+      context: .
+      dockerfile: GroceryStoreShopListApi/Dockerfile
+  gssl-postgres:
+    image: 'postgres:15.3-alpine'
+    container_name: gssl-postgres
+    restart: 'no'
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: GroceryStore
+    ports:
+      - '5431:5432'
+    volumes:
+      - './data/postgres:/var/lib/postgresql/data'
+  gssl-pgadmin:
+    image: 'dpage/pgadmin4:latest'
+    container_name: gssl-pgadmin
+    restart: 'no'
+    depends_on:
+      - gssl-postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    user: '$UID:$GID'
+    ports:
+      - '8080:80'
+    volumes:
+      - './data/pgadmin:/var/lib/pgadmin'
+  redis:
+    image: redis
+    command: redis-server --requirepass password
+    ports:
+      - "6378:6378"
+networks:
+  default:
+    name: local-network
+    external: true

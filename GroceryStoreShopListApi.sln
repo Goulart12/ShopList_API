@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroceryStoreShopListApi", "GroceryStoreShopListApi\GroceryStoreShopListApi.csproj", "{3814D0BC-0820-4D10-A54E-B9EA12EF4E32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28F8AD65-A624-45F1-99DE-1E0EFD1FA7DD}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3814D0BC-0820-4D10-A54E-B9EA12EF4E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3814D0BC-0820-4D10-A54E-B9EA12EF4E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3814D0BC-0820-4D10-A54E-B9EA12EF4E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3814D0BC-0820-4D10-A54E-B9EA12EF4E32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
