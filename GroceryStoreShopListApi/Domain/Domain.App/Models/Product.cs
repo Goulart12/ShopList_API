@@ -6,7 +6,7 @@ namespace GroceryStoreShopListApi.Domain.Domain.App.Models;
 [Table("product")]
 public class Product
 {
-    [Key]
+    // [Key]
     [Column("id")]
     public int Id { get; set; }
     
@@ -16,9 +16,10 @@ public class Product
     [Column("quantity")]
     public int Quantity { get; set; }
     
-    [ForeignKey("ShopList")]
+    // [ForeignKey("ShopList")]
     [Column("shoplistId")]
     public string ShopListId { get; set; } = string.Empty;
+    
     [Column("shoplist")]
-    public ShopList ShopList { get; set; } = null!;
+    public ShopList ShopList { get; set; }
 }

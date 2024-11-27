@@ -34,14 +34,10 @@ public class ProductService : IProductService
         {
             ProductName = inputModel.ProductName,
             Quantity = inputModel.Quantity,
-            ShopListId = shopListId,
-            ShopList = shopList
+            ShopListId = shopListId
         };
         
         await _productRepository.AddProductAsync(product);
-        
-        // shopList.Product = product;
-        // await _shopListRepository.UpdateShopListAsync(shopList);
     }
 
     public List<Product>? GetAllProducts(string shopListId)
@@ -49,5 +45,40 @@ public class ProductService : IProductService
         var products = _productRepository.GetAllProductsAsync(shopListId); 
         
         return products;
+    }
+
+    public async Task<Product?> GetProductById(int productId)
+    {
+        var product = await _productRepository.GetProductByIdAsync(productId);
+        
+        return product;
+    }
+    
+    public async Task<Product?> GetProductByName(string productName)
+    {
+        var product = await _productRepository.GetProductByNameAsync(productName);
+        
+        return product;
+    }
+
+    public async Task UpdateProduct(ProductInputModel inputModel, string oldName)
+    {
+        var product = await _productRepository.GetProductByNameAsync(oldName);
+        
+        if (product == null) return;
+        
+        product.ProductName = inputModel.ProductName;
+        product.Quantity = inputModel.Quantity;
+        
+        await _productRepository.UpdateProductAsync(product);
+    }
+    
+    public async Task DeleteProduct(string productName)
+    {
+        var product = await _productRepository.GetProductByNameAsync(productName);
+        
+        if (product == null) return;
+        
+        await _productRepository.DeleteProductAsync(product);
     }
 }

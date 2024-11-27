@@ -34,4 +34,44 @@ public class ProductController : ControllerBase
         
         return Ok(products);
     }
+
+    [Authorize]
+    [HttpGet]
+    [Route("Product/GetProduct/{productId}")]
+    public async Task<IActionResult> GetProduct([FromRoute] int productId)
+    {
+        var product = await _productService.GetProductById(productId);
+        
+        return Ok(product);
+    }
+    
+    [Authorize]
+    [HttpGet]
+    [Route("Product/GetProductByName")]
+    public async Task<IActionResult> GetProductByName([FromBody] string productName)
+    {
+        var product = await _productService.GetProductByName(productName);
+        
+        return Ok(product);
+    }
+
+    [Authorize]
+    [HttpPatch]
+    [Route("Product/Update/{oldName}")]
+    public async Task<IActionResult> UpdateProduct([FromBody] ProductInputModel inputModel, [FromRoute] string oldName)
+    {
+        await _productService.UpdateProduct(inputModel, oldName);
+        
+        return Ok(new { message = "Product updated successfully!" });
+    }
+
+    [Authorize]
+    [HttpDelete]
+    [Route("Product/Delete/{productName}")]
+    public async Task<IActionResult> DeleteProduct([FromRoute] string productName)
+    {
+        await _productService.DeleteProduct(productName);
+        
+        return Ok(new { message = "Product deleted successfully!" });
+    }
 }

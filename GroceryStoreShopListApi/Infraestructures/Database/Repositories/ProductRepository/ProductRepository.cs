@@ -1,6 +1,7 @@
 using GroceryStoreShopListApi.Data;
 using GroceryStoreShopListApi.Domain.Domain.App.Models;
 using GroceryStoreShopListApi.Domain.Domain.App.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace GroceryStoreShopListApi.Infraestructures.Database.Repositories.ProductRepository;
 
@@ -34,6 +35,18 @@ public class ProductRepository : IProductRepository
     public async Task<Product?> GetProductByIdAsync(int productId)
     {
         var product = await _shopListContext.Products.FindAsync(productId);
+
+        if (product == null)
+        {
+            return null;
+        }
+
+        return product;
+    }
+    
+    public async Task<Product?> GetProductByNameAsync(string name)
+    {
+        var product = await _shopListContext.Products.FirstOrDefaultAsync(x => x.ProductName == name);
 
         if (product == null)
         {

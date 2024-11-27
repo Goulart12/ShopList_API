@@ -7,18 +7,18 @@ namespace GroceryStoreShopListApi.Domain.Domain.App.Models;
 [Table("shoplist")]
 public class ShopList
 {
-    [Key]
+    // [Key]
     [Column("id")]
     public string Id { get; set;} = string.Empty;
     
-    [ForeignKey("User")]
+    // [ForeignKey("User")]
     [Column("userId")]
     public string UserId { get; set;} = string.Empty;
     
     [Column("listName")]
     public string ListName { get; set; } = string.Empty;
     
-    [Key]
+    // [Key]
     [Column("product")]
-    public Product? Product { get; set; }
+    public List<Product>? Product { get; set; }
 }

@@ -2,6 +2,7 @@
 using GroceryStoreShopListApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GroceryStoreShopListApi.Migrations
 {
     [DbContext(typeof(ShopListContext))]
-    partial class ShopListContextModelSnapshot : ModelSnapshot
+    [Migration("20241126014239_teste")]
+    partial class teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,8 +49,6 @@ namespace GroceryStoreShopListApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShopListId");
-
                     b.ToTable("product");
                 });
 
@@ -70,22 +71,6 @@ namespace GroceryStoreShopListApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("shoplist");
-                });
-
-            modelBuilder.Entity("GroceryStoreShopListApi.Domain.Domain.App.Models.Product", b =>
-                {
-                    b.HasOne("GroceryStoreShopListApi.Domain.Domain.App.Models.ShopList", "ShopList")
-                        .WithMany("Product")
-                        .HasForeignKey("ShopListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ShopList");
-                });
-
-            modelBuilder.Entity("GroceryStoreShopListApi.Domain.Domain.App.Models.ShopList", b =>
-                {
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
