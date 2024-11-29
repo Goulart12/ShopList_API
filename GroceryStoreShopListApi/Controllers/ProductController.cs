@@ -47,30 +47,30 @@ public class ProductController : ControllerBase
     
     [Authorize]
     [HttpGet]
-    [Route("Product/GetProductByName")]
-    public async Task<IActionResult> GetProductByName([FromBody] string productName)
+    [Route("Product/GetProductByName/{shopListId}/{productName}")]
+    public async Task<IActionResult> GetProductByName([FromRoute] string shopListId, string productName)
     {
-        var product = await _productService.GetProductByName(productName);
+        var product = await _productService.GetProductByName(productName, shopListId);
         
         return Ok(product);
     }
 
     [Authorize]
     [HttpPatch]
-    [Route("Product/Update/{oldName}")]
-    public async Task<IActionResult> UpdateProduct([FromBody] ProductInputModel inputModel, [FromRoute] string oldName)
+    [Route("Product/Update/{shopListId}")]
+    public async Task<IActionResult> UpdateProduct([FromRoute] string shopListId, [FromBody] ProductInputModel inputModel, string oldName)
     {
-        await _productService.UpdateProduct(inputModel, oldName);
+        await _productService.UpdateProduct(inputModel, oldName, shopListId);
         
         return Ok(new { message = "Product updated successfully!" });
     }
 
     [Authorize]
     [HttpDelete]
-    [Route("Product/Delete/{productName}")]
-    public async Task<IActionResult> DeleteProduct([FromRoute] string productName)
+    [Route("Product/Delete/{shopListId}")]
+    public async Task<IActionResult> DeleteProduct([FromRoute] string shopListId, [FromBody] string productName)
     {
-        await _productService.DeleteProduct(productName);
+        await _productService.DeleteProduct(productName, shopListId);
         
         return Ok(new { message = "Product deleted successfully!" });
     }

@@ -53,4 +53,22 @@ public class UserController : ControllerBase
         
         return Ok(result);
     }
+
+    [HttpPost]
+    [Route("User/AddRole")]
+    public async Task<IActionResult> AddRole([FromBody] string roleName)
+    {
+        await _userService.AddUserRoleAsync(roleName);
+        
+        return Ok(new { message = "Role added successfully!" });
+    }
+
+    [HttpGet]
+    [Route("User/GetRoles/{roleId}")]
+    public async Task<IActionResult> GetRoles([FromRoute] string roleId)
+    {
+        var result = await _userService.GetUserRoleAsync(roleId);
+
+        return Ok(result);
+    }
 }

@@ -21,4 +21,10 @@ public class User
     [JsonIgnore]
     [Column("password")]
     public string Password { get; set; }
+    
+    [Column("roleId")]
+    public int RoleId { get; set; }
+    
+    [Column("Role")]
+    public Role Role { get; set; }
 }

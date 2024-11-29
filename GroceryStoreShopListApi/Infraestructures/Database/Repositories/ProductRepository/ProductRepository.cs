@@ -44,9 +44,9 @@ public class ProductRepository : IProductRepository
         return product;
     }
     
-    public async Task<Product?> GetProductByNameAsync(string name)
+    public async Task<Product?> GetProductByNameAsync(string name, string shopListId)
     {
-        var product = await _shopListContext.Products.FirstOrDefaultAsync(x => x.ProductName == name);
+        var product = await _shopListContext.Products.FirstOrDefaultAsync(x => x.ProductName == name && x.ShopListId == shopListId);
 
         if (product == null)
         {

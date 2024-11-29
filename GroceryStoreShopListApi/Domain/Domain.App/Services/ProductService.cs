@@ -54,16 +54,16 @@ public class ProductService : IProductService
         return product;
     }
     
-    public async Task<Product?> GetProductByName(string productName)
+    public async Task<Product?> GetProductByName(string productName, string shopListId)
     {
-        var product = await _productRepository.GetProductByNameAsync(productName);
+        var product = await _productRepository.GetProductByNameAsync(productName, shopListId);
         
         return product;
     }
 
-    public async Task UpdateProduct(ProductInputModel inputModel, string oldName)
+    public async Task UpdateProduct(ProductInputModel inputModel, string oldName, string shopListId)
     {
-        var product = await _productRepository.GetProductByNameAsync(oldName);
+        var product = await _productRepository.GetProductByNameAsync(oldName, shopListId);
         
         if (product == null) return;
         
@@ -73,9 +73,9 @@ public class ProductService : IProductService
         await _productRepository.UpdateProductAsync(product);
     }
     
-    public async Task DeleteProduct(string productName)
+    public async Task DeleteProduct(string productName, string shopListId)
     {
-        var product = await _productRepository.GetProductByNameAsync(productName);
+        var product = await _productRepository.GetProductByNameAsync(productName, shopListId);
         
         if (product == null) return;
         

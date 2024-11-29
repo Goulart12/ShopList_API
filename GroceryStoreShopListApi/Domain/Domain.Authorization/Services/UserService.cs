@@ -43,6 +43,7 @@ public partial class UserService : IUserService
             FirstName = userInputModel.FirstName,
             LastName = userInputModel.LastName,
             Password = hash,
+            RoleId = 2
         };
         
         await _userRepository.AddUserAsync(user);
@@ -70,6 +71,25 @@ public partial class UserService : IUserService
         }
         
         return user;
+    }
+
+    public async Task AddUserRoleAsync(string roleName)
+    {
+        var role = new Role()
+        {
+            RoleName = roleName
+        };
+        
+        await _userRepository.AddRoleAsync(role);
+    }
+
+    public async Task<Role?> GetUserRoleAsync(string roleId)
+    {
+        var role = await _userRepository.GetRoleAsync(roleId);
+        
+        if (role == null) return null;
+        
+        return role;
     }
 
     [GeneratedRegex(PasswordValidationRegEx)]

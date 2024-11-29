@@ -43,7 +43,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (tokenCache != null)
         {
-            throw new RedisException("Already stored");
+            _RedisCacheService.RemoveCachedData(cacheKey);
         }
         
         _RedisCacheService.SetCachedData(cacheKey, token, TimeSpan.FromMinutes(30));
