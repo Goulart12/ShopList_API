@@ -11,5 +11,5 @@ public class Role
     public string RoleName { get; set; } = string.Empty;
     
     [Column("User")]
-    public User User { get; set; }
+    public List<User>? User { get; set; }
 }

@@ -72,8 +72,7 @@ namespace GroceryStoreShopListApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId")
-                        .IsUnique();
+                    b.HasIndex("RoleId");
 
                     b.ToTable("users");
                 });
@@ -81,8 +80,8 @@ namespace GroceryStoreShopListApi.Migrations
             modelBuilder.Entity("GroceryStoreShopListApi.Authorization.Models.User", b =>
                 {
                     b.HasOne("GroceryStoreShopListApi.Authorization.Models.Role", "Role")
-                        .WithOne("User")
-                        .HasForeignKey("GroceryStoreShopListApi.Authorization.Models.User", "RoleId")
+                        .WithMany("User")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -91,8 +90,7 @@ namespace GroceryStoreShopListApi.Migrations
 
             modelBuilder.Entity("GroceryStoreShopListApi.Authorization.Models.Role", b =>
                 {
-                    b.Navigation("User")
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
